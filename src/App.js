@@ -5,7 +5,8 @@ import AddedFeatures from './components/AddedFeatures';
 import AdditionalFeatures from './components/AdditionalFeatures';
 import Total from './components/Total';
 import {connect} from 'react-redux';
-
+import {Provider} from 'react-redux';
+import {BuyItemContext, RemoveItemContext} from './context/context';
 const App = (props) => {
   console.log(props)
   const removeFeature = item => {
@@ -14,9 +15,12 @@ const App = (props) => {
 
   const buyItem = item => {
     // dipsatch an action here to add an item
+    console.log(item)
   };
 
   return (
+    <RemoveItemContext.Provider value={removeFeature}>
+      <BuyItemContext.Provider value={buyItem}>
     <div className="boxes">
       <div className="box">
         <Header car={props.car} />
@@ -27,6 +31,8 @@ const App = (props) => {
         <Total car={props.car} additionalPrice={props.additionalPrice} />
       </div>
     </div>
+    </BuyItemContext.Provider>
+    </RemoveItemContext.Provider>
   );
 };
 
