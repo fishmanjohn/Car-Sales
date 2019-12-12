@@ -7,15 +7,17 @@ import Total from './components/Total';
 import {connect} from 'react-redux';
 import {Provider} from 'react-redux';
 import {BuyItemContext, RemoveItemContext} from './context/context';
+import {addItem, removeItem} from './actions/actions'
 const App = (props) => {
   console.log(props)
   const removeFeature = item => {
     // dispatch an action here to remove an item
+    props.removeItem(item)
   };
 
   const buyItem = item => {
     // dipsatch an action here to add an item
-    console.log(item)
+    props.addItem(item)
   };
 
   return (
@@ -44,4 +46,4 @@ const mapStateToProps = state =>{
   }
 }
 
-export default connect(mapStateToProps, {})(App);
+export default connect(mapStateToProps, {addItem, removeItem})(App);
